@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Main from "./componets/Main";
+import Users from './componets/Users';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default class App extends React.Component {
         <StatusBar />
         <Stack.Navigator>
           <Stack.Screen name="main" component={Main} options={{ headerShown: false }} />
+          <Stack.Screen name="users" component={Users} />
         </Stack.Navigator>
       </NavigationContainer>
     )

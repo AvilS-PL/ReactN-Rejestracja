@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 
 import MyButton from "./MyButton";
+import settings from "../Settings.json";
 
 export default class Main extends Component {
     constructor(props) {
@@ -12,25 +13,26 @@ export default class Main extends Component {
         };
     }
 
-
-    regi = () => {
-
+    regi = async () => {
         if (this.state.login == "" || this.state.password == "") {
             alert("provide all data")
         } else {
+            const adres = "http://" + settings.ip + ":" + settings.port + "/register"
             const body = JSON.stringify({ login: this.state.login, password: this.state.password })
             const headers = { "Content-Type": "application/json" }
 
-            fetch("http://192.168.43.201:3000/register", { method: "POST", body, headers: headers }) // fetch
-                .then(response => response.json())
-                .then(
-                    data => {
-                        alert(data)
-                    },
-
-                )
+            let result = await fetch(adres, { method: "POST", body, headers })
+            let odp = await result.json()
+            alert(odp)
+            Alert.alert('Alert Title', 'My Alert Msg', [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ]);
         }
-
     }
 
     setText1 = (x) => {
