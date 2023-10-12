@@ -13,11 +13,11 @@ export default class Screen1 extends Component {
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 12,
-                height: 50,
-                width: 100,
+                height: 10 * this.props.y,
+                width: 10 * this.props.x,
                 elevation: 3,
             }}>
-                <Text style={{ fontSize: 16, color: this.props.tcolor, textShadowColor: "#555555", textShadowRadius: 20, }}>
+                <Text style={{ fontSize: 16, color: this.props.tcolor }}>
                     {this.props.text}
                 </Text>
             </TouchableOpacity>

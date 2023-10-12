@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Button, StyleSheet, TextInput, KeyboardAvoidingView, Alert } from 'react-native';
 
 import MyButton from "./MyButton";
 import settings from "../Settings.json";
@@ -23,15 +23,11 @@ export default class Main extends Component {
 
             let result = await fetch(adres, { method: "POST", body, headers })
             let odp = await result.json()
-            alert(odp)
-            Alert.alert('Alert Title', 'My Alert Msg', [
-                {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                },
-                { text: 'OK', onPress: () => console.log('OK Pressed') },
-            ]);
+            if (odp == "USEREXISTS") {
+                alert("USEREXISTS")
+            } else if (odp == "GUT") {
+                this.props.navigation.navigate("users")
+            }
         }
     }
 
@@ -56,7 +52,7 @@ export default class Main extends Component {
             >
                 <View style={styles.main}>
                     <View style={styles.top}>
-                        <Text style={{ fontSize: 50, color: "white", textShadowColor: "#555555", textShadowRadius: 20, }}>Register App</Text>
+                        <Text style={{ fontSize: 50, color: "white" }}>Register App</Text>
                     </View>
                     <View style={styles.bottom}>
                         <TextInput
@@ -69,7 +65,7 @@ export default class Main extends Component {
                             placeholder="Password"
                             onChangeText={a => this.setText2(a)}
                         />
-                        <MyButton text="Register" color="#8BC34A" tcolor="white" fun={this.regi} />
+                        <MyButton text="Register" color="#8BC34A" tcolor="white" fun={this.regi} x="8" y="4" />
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -81,7 +77,7 @@ export default class Main extends Component {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        backgroundColor: "#DCEDC8",
+        backgroundColor: "white",
     },
     top: {
         flex: 1,

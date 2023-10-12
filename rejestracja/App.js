@@ -19,8 +19,18 @@ export default class App extends React.Component {
       <NavigationContainer>
         <StatusBar />
         <Stack.Navigator>
-          <Stack.Screen name="main" component={Main} options={{ headerShown: false }} />
-          <Stack.Screen name="users" component={Users} />
+          {/* <Stack.Screen name="main" component={Main} options={{ headerShown: false }} /> */}
+          <Stack.Screen name="users" component={Users} options={{
+            title: 'admin panel',
+            headerStyle: {
+              backgroundColor: '#8BC34A',
+            },
+            headerTintColor: 'white',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerShadowVisible: true,
+          }} />
         </Stack.Navigator>
       </NavigationContainer>
     )
