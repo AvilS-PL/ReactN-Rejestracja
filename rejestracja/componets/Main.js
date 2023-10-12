@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import MyButton from "./MyButton";
 import settings from "../Settings.json";
@@ -50,24 +50,26 @@ export default class Main extends Component {
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={{ flex: 1 }}
             >
-                <View style={styles.main}>
-                    <View style={styles.top}>
-                        <Text style={{ fontSize: 50, color: "white" }}>Register App</Text>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.main}>
+                        <View style={styles.top}>
+                            <Text style={{ fontSize: 50, color: "white" }}>Register App</Text>
+                        </View>
+                        <View style={styles.bottom}>
+                            <TextInput
+                                style={{ height: 40, marginTop: 20, borderBottomWidth: 1, width: 200, }}
+                                placeholder="Login"
+                                onChangeText={a => this.setText1(a)}
+                            />
+                            <TextInput
+                                style={{ height: 40, margin: 20, borderBottomWidth: 1, width: 200, }}
+                                placeholder="Password"
+                                onChangeText={a => this.setText2(a)}
+                            />
+                            <MyButton text="Register" color="#8BC34A" tcolor="white" fun={this.regi} x="8" y="4" />
+                        </View>
                     </View>
-                    <View style={styles.bottom}>
-                        <TextInput
-                            style={{ height: 40, marginTop: 20, borderBottomWidth: 1, width: 200, }}
-                            placeholder="Login"
-                            onChangeText={a => this.setText1(a)}
-                        />
-                        <TextInput
-                            style={{ height: 40, margin: 20, borderBottomWidth: 1, width: 200, }}
-                            placeholder="Password"
-                            onChangeText={a => this.setText2(a)}
-                        />
-                        <MyButton text="Register" color="#8BC34A" tcolor="white" fun={this.regi} x="8" y="4" />
-                    </View>
-                </View>
+                </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
         );
     }
