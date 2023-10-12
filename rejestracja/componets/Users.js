@@ -14,11 +14,31 @@ export default class Users extends Component {
         };
     }
 
-    delUser = async () => {
+    backTo = () => {
+        this.props.navigation.navigate("main")
     }
 
-    getUser = async () => {
+    delUser = async (x) => {
+        const adres = "http://" + settings.ip + ":" + settings.port + "/delUser"
+        const body = JSON.stringify({ id: x })
+        const headers = { "Content-Type": "application/json" }
+
+        let result = await fetch(adres, { method: "PATCH", body, headers })
+        let odp = await result.json()
+        this.setState({
+            tab: odp
+        })
     }
+
+    getUser = async (x) => {
+        const adres = "http://" + settings.ip + ":" + settings.port + "/getUser?id=" + x
+        const headers = { "Content-Type": "application/json" }
+
+        let result = await fetch(adres, { method: "GET", headers })
+        let odp = await result.json()
+        this.props.navigation.navigate("details", odp)
+    }
+
     getUsers = async () => {
         const adres = "http://" + settings.ip + ":" + settings.port + "/getUsers"
         const headers = { "Content-Type": "application/json" }
@@ -34,12 +54,12 @@ export default class Users extends Component {
         return (
             <View style={styles.main}>
                 <View style={styles.back}>
-                    <MyButton text="Back to login page" color="#8BC34A" tcolor="white" x="20" y="4" />
+                    <MyButton fun={this.backTo} text="Back to login page" color="#8BC34A" tcolor="white" x="20" y="4" />
                 </View>
                 <View style={styles.list}>
                     <FlatList
                         data={this.state.tab}
-                        renderItem={({ item }) => <ListItem name={item.name} password={item.password} time={item.time} id={item.id} />}
+                        renderItem={({ item }) => <ListItem getFun={this.getUser} delFun={this.delUser} login={item.login} password={item.password} time={item.time} id={item.id} />}
                         keyExtractor={item => item.id}
                     />
                 </View>
@@ -54,10 +74,12 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
     },
     back: {
+        backgroundColor: "#689F38",
+
         alignItems: "center",
         justifyContent: 'center',
-        backgroundColor: "#689F38",
         flex: 1,
+
         elevation: 4,
     },
     list: {

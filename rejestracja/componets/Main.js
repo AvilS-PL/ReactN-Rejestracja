@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet, TextInput, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 
 import MyButton from "./MyButton";
 import settings from "../Settings.json";

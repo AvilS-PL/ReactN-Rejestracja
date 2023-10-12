@@ -15,11 +15,11 @@ export default class ListItem extends Component {
             <View style={styles.main}>
                 <View style={styles.left}>
                     <Image style={styles.img} source={require('../default.png')}></Image>
-                    <Text> {this.props.id}: {this.props.name} </Text>
+                    <Text style={{ color: "#212121", }}> {this.props.id}: {this.props.login} </Text>
                 </View>
                 <View style={styles.right}>
-                    <MyButton text="Details" color="#8BC34A" tcolor="white" x="8" y="4" />
-                    <MyButton text="Delete" color="#8BC34A" tcolor="white" x="8" y="4" />
+                    <MyButton fun={() => this.props.getFun(this.props.id)} text="Details" color="#8BC34A" tcolor="white" x="8" y="4" />
+                    <MyButton fun={() => this.props.delFun(this.props.id)} text="Delete" color="#FF5722" tcolor="white" x="8" y="4" />
                 </View>
             </View>
         );
@@ -36,9 +36,7 @@ const styles = StyleSheet.create({
 
         borderRadius: 12,
 
-        marginHorizontal: 20,
-        marginVertical: 10,
-        marginBottom: 20,
+        margin: 20,
         height: 100,
     },
     left: {
@@ -50,7 +48,8 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         elevation: 3,
 
-        flex: 2,
+        flex: 3,
+        height: 120,
     },
     right: {
         flexDirection: "row",
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
 
     },
     img: {
-        width: 100,
-        height: 100
+        width: 80,
+        height: 80
     }
 });
